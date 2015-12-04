@@ -112,6 +112,12 @@ with open(filename, "w") as f:
 
 				#Disable the E steppers
 				f.write("M84 E0\n")
+				
+				#Comment to say what we're doing
+				f.write(";Changing extruder temperature to 240");
+				#Changing Extruder temp to 240
+				f.write("M104 S%f T0\n" % float(240))
+				
 				#Pause for the desired number of seconds
 				f.write("G4 P%s000\n" % (str(parkDuration)))
 				#Push the filament back, and retract again, the properly primes the nozzle when changing filament.
