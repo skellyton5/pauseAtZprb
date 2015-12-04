@@ -8,6 +8,10 @@
 #Param: parkY(float:0) Head park Y (mm)
 #Param: moveZ(float:0) Head move Z (mm)
 #Param: retractAmount(float:5) Retraction amount (mm)
+#Param: newTemp(float:220) New Temp (*C)
+#Param: oldSpeed(float:100) Old Speed (mm/s)
+#Param: newSpeed(float:100) New Speed (mm/s)
+
 
 #This plugin is a slightly modified version of the original pauseAtZ written by David Braam. It is modified for the printrbot which doesn't rely on a button press to continue after the pause. The plugin will pause the printer at the given height for the given duration, one minute should be long enough for a filament change.
 
@@ -56,6 +60,10 @@ with open(filename, "w") as f:
 	lineIndex = 0
 	lastLayerIndex = 99999
 	layerZ = 0
+	
+	#Calculate the percentage change in speed
+	speedChange = 100 * (newSpeed)/(oldSpeed)
+
 	for lIndex in xrange(len(lines)):
 		line = lines[lIndex]
 		if line.startswith(';'):
@@ -109,14 +117,14 @@ with open(filename, "w") as f:
 				f.write(";PAUSING PRINT");
 				#Move the head away
 				f.write("G1 X%f Y%f F9000\n" % (parkX, parkY))
-
+				
+				#Set new temp
+				f.write("M104 S%f\n" % (newTemp))
+				#Set new speed
+				f.write("M220 S%f\n" % (speedChange))
+				
 				#Disable the E steppers
 				f.write("M84 E0\n")
-				
-				#Comment to say what we're doing
-				f.write(";Changing extruder temperature to 240");
-				#Changing Extruder temp to 240
-				f.write("M104 S%f T0\n" % float(240))
 				
 				#Pause for the desired number of seconds
 				f.write("G4 P%s000\n" % (str(parkDuration)))
