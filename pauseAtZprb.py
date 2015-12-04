@@ -1,22 +1,3 @@
-Skip to content
- 
-
-Search…
-All gists
-GitHub
-New gist
-@skellyton5
-You don’t have any verified emails. We recommend verifying at least one email.
-Email verification helps our support team verify ownership if you lose account access and allows you to receive all the notifications you ask for.
-  Star 0
-  Fork 0
-  @MSURunnerMSURunner/adjustSpeedTemp
-Created 3 years ago
-Embed  
-<script src="https://gist.github.com/MSURunner/4598137.js"></script>
-  Download ZIP
- Code  Revisions 1
-Raw  adjustSpeedTemp
 #Name: Adjust Temp/Speed
 #Info: Alter the speed and temp of the printer at a certain height
 #Depend: GCode
@@ -70,12 +51,3 @@ with open(filename, "w") as f:
 					#Set new speed
 					f.write("M220 S%f\n" % (speedChange))		
 		f.write(line)
- @skellyton5
- Styling with Markdown is supported
-Write Preview
-
-Leave a comment
-Attach files by dragging & dropping,  Choose Files selecting them, or pasting from the clipboard.
-Comment
-Status API Training Shop Blog About Pricing
-© 2015 GitHub, Inc. Terms Privacy Security Contact Help
